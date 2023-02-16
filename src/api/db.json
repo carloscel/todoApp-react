@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Leanne Graham",
+      "description": "Multi-layered client-server neural-net"
+    },
+    {
+      "id": 2,
+      "name": "Ervin Howell",
+      "description": "Proactive didactic contingency"
+    },
+    {
+      "id": 3,
+      "name": "Clementine Bauch",
+      "description": "Face to face bifurcated interface"
+    },
+    {
+      "id": 4,
+      "name": "Patricia Lebsack",
+      "description": "Multi-tiered zero tolerance productivity"
+    },
+    {
+      "id": 5,
+      "name": "Chelsey Dietrich",
+      "description": "User-centric fault-tolerant solution"
+    }
+  ]
+}

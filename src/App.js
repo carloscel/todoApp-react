@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { TodoAdd } from './components/TodoAdd';
+import { TodoList } from './components/TodoList';
+import { helpHttp } from './helpers/helpHttp';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export const App = () => {
+	const [todos, setTodos] = useState([]);
+	const { deleteData } = helpHttp();
+	const url = 'http://localhost:3004/users';
 
-export default App;
+	const jsonDB = async () => {
+		const resp = await axios(url);
+		setTodos(resp.data);
+		console.log(resp.data);
+	};
+
+	useEffect(() => {
+		jsonDB();
+	}, []);
+
+	const handleNewTodo = (todo) => {
+		setTodos([...todos, todo]);
+	};
+
+	const handleDeleteTodo = (id) => {
+		console.log(id);
+		setTodos(todos.filter((todo) => todo.id !== id));
+		deleteData(id);
+	};
+
+	const handleEditTodo = (id) => {
+		console.log(id);
+	};
+
+	return (
+		<div>
+			<h1>TodoApp</h1>
+			<div>
+				<section>
+					<h4>Agregar TODO</h4>
+					<TodoAdd todos={todos} onNewTodo={handleNewTodo} />
+				</section>
+				<section>
+					<TodoList
+						todos={todos}
+						deleteTodo={handleDeleteTodo}
+						updateTodo={handleEditTodo}
+					/>
+				</section>
+			</div>
+		</div>
+	);
+};
